@@ -1,0 +1,22 @@
+Koth:
+  # (TRUE/FALSE)
+  Enable: true
+  # Amount of Seconds it takes to Capture Koth.
+  Capture-Time: 500
+  # Amount of minutes between a player can Capture Koth.
+  Cooldown-Time: 30
+
+  Broadcast:
+    # Should the plugin broadcast a message when a player start to Capture Koth? (TRUE/FALSE)
+    Start: true
+    # Should the plugin broadcast a message when a player cancel/fail a Koth Capture? (TRUE/FALSE)
+    Cancel: false
+    # Should the plugin broadcast a message when a player successfully Captures Koth? (TRUE/FALSE)
+    End: true
+
+  Reward: DIAMOND
+  Hologram:
+    World: 'world'
+    X: -10
+    Y: 79
+    Z: 76

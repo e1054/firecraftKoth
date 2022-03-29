@@ -1,0 +1,6 @@
+name: firecraftkoth
+version: '${project.version}'
+main: Com.FirecraftKoth
+softdepend: [WorldGuard]
+depend: [ActionBarAPI, WGRegionEvents]
+authors: [ Bondegaard ]
