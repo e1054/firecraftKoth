@@ -8,7 +8,12 @@ import org.bukkit.entity.Firework;
 import org.bukkit.inventory.meta.FireworkMeta;
 
 public class FireWork {
-
+    /**
+     * Makes a set Firewaork that spawns above a location the a world.
+     * The Firework will be Red, Yellow and Orange.
+     * @param loc The location to fire the Firework
+     * @param world The World to fire the firework
+     */
     public void createFirework(Location loc, World world) {
         Firework fw = world.spawn(loc, Firework.class);
         FireworkMeta ftm = (FireworkMeta) fw.getFireworkMeta();

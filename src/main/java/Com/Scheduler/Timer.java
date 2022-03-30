@@ -1,7 +1,6 @@
 package Com.Scheduler;
 
 import Com.Events.KothEnd;
-import Com.Events.KothStart;
 import Com.FirecraftKoth;
 import com.connorlinfoot.actionbarapi.ActionBarAPI;
 import org.bukkit.Bukkit;
@@ -52,6 +51,11 @@ public class Timer {
             }
         }, 0L, 20L);
     }
+
+    /**
+     * Fires when the Capture timer is finish.
+     * Calls an event so the plugin knows Koth has been captured.
+     */
     private void TimerFinish() {
         stopTimer();
         Bukkit.getServer().getPluginManager().callEvent(new KothEnd(player));
