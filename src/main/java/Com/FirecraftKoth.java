@@ -37,7 +37,6 @@ public final class FirecraftKoth extends JavaPlugin {
 
     }
 
-    @Override
     public Koth getKoth() {return koth;}
     public Timer getTimer() {return timer;}
     public KothCooldown getKothCooldown() {return kothCooldown;}
