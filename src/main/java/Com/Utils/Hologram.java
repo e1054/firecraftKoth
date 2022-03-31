@@ -42,10 +42,8 @@ public class Hologram {
     }
 
     public void removeKothHologram() {
-        hologramTitle.remove();
-        hologram1.remove();
-        hologram2.remove();
-        hologram3.remove();
+        //Removes all holograms
+        for (Hologram hologram : HologramsAPI.getHolograms(this)) hologram.delete();
     }
 
     public void setKothTime(int time) {

@@ -21,6 +21,7 @@ public final class FirecraftKoth extends JavaPlugin {
 
     @Override
     public void onEnable() {
+        hologram.removeKothHologram();
         koth = new Koth();
         timer = new Timer(this);
         kothCooldown = new KothCooldown( this);
@@ -37,9 +38,6 @@ public final class FirecraftKoth extends JavaPlugin {
     }
 
     @Override
-    public void onDisable() {
-        hologram.removeKothHologram();
-    }
     public Koth getKoth() {return koth;}
     public Timer getTimer() {return timer;}
     public KothCooldown getKothCooldown() {return kothCooldown;}
