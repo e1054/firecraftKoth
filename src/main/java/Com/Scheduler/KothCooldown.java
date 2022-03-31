@@ -1,8 +1,6 @@
 package Com.Scheduler;
 
-import Com.Events.KothEnd;
 import Com.FirecraftKoth;
-import com.connorlinfoot.actionbarapi.ActionBarAPI;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
@@ -52,6 +50,11 @@ public class KothCooldown {
             }
         }, 0L,60*20L);
     }
+
+    /**
+     * Fires when the koth timer is finish.
+     * Calls Koth to indicate that koth can be captured again.
+     */
     private void TimerFinish() {
         stopTimer();
         instance.getKoth().setCanBeTakenOver(true);

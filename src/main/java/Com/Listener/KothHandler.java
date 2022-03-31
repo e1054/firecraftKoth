@@ -12,6 +12,9 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.inventory.ItemStack;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class KothHandler implements Listener {
     private FirecraftKoth instance;
 
@@ -19,6 +22,11 @@ public class KothHandler implements Listener {
         this.instance = instance;
     }
 
+    /**
+     * Fires when a player trieds to Capture Koth.
+     * Handles Koth-- capture time-- and broadcast messages to players if enabled in the config
+     * @param event the event
+     */
     @EventHandler
     public void kothStart(KothStart event) {
         if (!instance.getConfig().getBoolean("Koth.Enable")) {
@@ -40,7 +48,11 @@ public class KothHandler implements Listener {
                 Bukkit.getServer().broadcastMessage(setColor("&6&l[KOTH] &e" + event.getPlayer().getName() + " &ffra &e" + event.getFaction() + " &fprøver at overtage koth i spawn."));
         }
     }
-
+    /**
+     * Fires when a player successfully Captures Koth.
+     * Handles Koth, rewards, Cooldown, and broadcast messages to players if enabled in the config
+     * @param event the event
+     */
     @EventHandler
     public void kothEnd(KothEnd event) {
         if (!event.getPlayer().equals(instance.getKoth().getPlayer()))
@@ -55,6 +67,11 @@ public class KothHandler implements Listener {
         }
     }
 
+    /**
+     * Fires when a player failes to capture Koth. (If player leaves the region og leaves the server)
+     * Makes the next person in line that is still in the region start to capture Koth
+     * @param event the event
+     */
     @EventHandler
     public void kothCancel(KothCancel event) {
         if (!event.getPlayer().equals(instance.getKoth().getPlayer()))
@@ -67,11 +84,27 @@ public class KothHandler implements Listener {
         }
     }
 
+    /**
+     * Handles rewards for Koth. Gives a player the reward only if there is space their inventory.
+     * If there is no space in the players inventory, the reward is dropped on the ground.
+     * @param player The player who is receiving the reward.
+     */
     private void RewardHandler(Player player) {
         try {
             ItemStack drops = new ItemStack(Material.valueOf(instance.getConfig().getString("Koth.Reward")), 1);
-            player.getInventory().addItem(drops);
-        } catch (Exception e) {}
+            if (player.getInventory().firstEmpty() != -1)
+                player.getInventory().addItem(drops);
+            else
+                player.getWorld().dropItem(player.getLocation(), drops);
+
+        } catch (Exception e) {
+            String timeStamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
+            player.sendMessage(setColor("&6&l[KOTH] &fDer skete en fejl! Opret en ticket med dette. (&6"
+                    + player.getPlayer()
+                    + " &ffik ikke sin reward i Koth &6d."
+                    + timeStamp
+                    +"&f)"));
+        }
 
     }
 

@@ -5,7 +5,6 @@ import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.EntityType;
-import org.bukkit.entity.Player;
 
 
 public class Hologram {
@@ -13,6 +12,12 @@ public class Hologram {
     private ArmorStand hologram1;
     private ArmorStand hologram2;
     private ArmorStand hologram3;
+
+    /**
+     * Makes a set Hologram at a specific location.
+     * The Hologram will display the Cooldown for Koth.
+     * @param loc The location of the Hologram
+     */
     public void makeKothHologram(Location loc) {
         // Title
         World world = loc.getWorld();
@@ -41,11 +46,19 @@ public class Hologram {
         hologram3.setCustomName(setColor("&8&m-|---------------|-|---------------|-"));
     }
 
+    /**
+     * Will remove the Hologram made by makeKothHologram()
+     * This method will run before the plugin shutsdown.
+     */
     public void removeKothHologram() {
         //Removes all holograms
         for (Hologram hologram : HologramsAPI.getHolograms(this)) hologram.delete();
     }
 
+    /**
+     * Changes the timer on the second line of the Hologram to the amount of time ontil Koth can be Captured.
+     * @param time The amount of minutes
+     */
     public void setKothTime(int time) {
         if (time > 0)
             hologram2.setCustomName(setColor("&fKoth kan overtages igen om &6" + time + " Minutter&f."));
